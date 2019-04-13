@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiedraPapelTijera.Android", "PiedraPapelTijera\PiedraPapelTijera.Android\PiedraPapelTijera.Android.csproj", "{39254D2B-B304-4B5C-9773-1DD78C3C9797}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiedraPapelTijera", "PiedraPapelTijera\PiedraPapelTijera\PiedraPapelTijera.csproj", "{7218F6A0-4BE5-4888-BAB0-228249BCC542}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PiedraPapelTijera.Vista", "PiedraPapelTijera\PiedraPapelTijera\PiedraPapelTijera.Vista.csproj", "{7218F6A0-4BE5-4888-BAB0-228249BCC542}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiedraPapelTijera.Modelo", "PiedraPapelTijera.Modelo\PiedraPapelTijera.Modelo.csproj", "{B3A9DE82-958C-4903-BDC2-1AE35624DE2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiedraPapelTijera.VistaModelo", "PiedraPapelTijera.VistaModelo\PiedraPapelTijera.VistaModelo.csproj", "{CFF2AC4F-B0AA-4E7B-8229-861D2F045C9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,14 @@ Global
 		{7218F6A0-4BE5-4888-BAB0-228249BCC542}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7218F6A0-4BE5-4888-BAB0-228249BCC542}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7218F6A0-4BE5-4888-BAB0-228249BCC542}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B3A9DE82-958C-4903-BDC2-1AE35624DE2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A9DE82-958C-4903-BDC2-1AE35624DE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A9DE82-958C-4903-BDC2-1AE35624DE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A9DE82-958C-4903-BDC2-1AE35624DE2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF2AC4F-B0AA-4E7B-8229-861D2F045C9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF2AC4F-B0AA-4E7B-8229-861D2F045C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF2AC4F-B0AA-4E7B-8229-861D2F045C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF2AC4F-B0AA-4E7B-8229-861D2F045C9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,6 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
-namespace PiedraPapelTijera
+namespace PiedraPapelTijera.Vista
 {
     public partial class App : Application
     {
@@ -10,7 +8,7 @@ namespace PiedraPapelTijera
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new Principal();
         }
 
         protected override void OnStart()
