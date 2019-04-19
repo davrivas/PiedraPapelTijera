@@ -6,7 +6,8 @@ namespace PiedraPapelTijera.VistaModelo
     public class InicioVistaModelo
     {
         public ObservableCollection<Opcion> Opciones { get; private set; }
-        public ObservableCollection<Jugador> Jugadores { get; set; }
+        public Jugador Humano { get; private set; }
+        public Jugador Maquina { get; private set; }
 
         public InicioVistaModelo()
         {
@@ -28,17 +29,8 @@ namespace PiedraPapelTijera.VistaModelo
                     NombreArchivo = "tijera.png"
                 }
             };
-            Jugadores = new ObservableCollection<Jugador>
-            {
-                new Jugador
-                {
-                     EsHumano = true
-                },
-                new Jugador
-                {
-                    EsHumano = false
-                }
-            };
+            Humano = new Jugador { EsHumano = true };
+            Maquina = new Jugador { EsHumano = false };
         }
     }
 }
