@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Modelo\" />
     <Folder Include="VistaModelo\" />
   </ItemGroup>
 
