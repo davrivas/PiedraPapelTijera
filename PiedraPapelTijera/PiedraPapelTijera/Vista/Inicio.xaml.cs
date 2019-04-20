@@ -1,4 +1,5 @@
 ﻿using PiedraPapelTijera.VistaModelo;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,6 +15,12 @@ namespace PiedraPapelTijera.Vista
             InitializeComponent();
             _vistaModelo = new InicioVistaModelo();
             BindingContext = _vistaModelo;
+        }
+
+        private void SeleccionarOpcion(object sender, EventArgs e)
+        {
+            object opcionSeleccionada = pckOpciones.SelectedItem;
+            _vistaModelo.ComandoEscogerOpcion.Execute(opcionSeleccionada);
         }
     }
 }

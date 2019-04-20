@@ -1,12 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PiedraPapelTijera.Vista.Inicio">
+             x:Class="PiedraPapelTijera.Vista.Inicio"
+             Title="Piedra papel o tijera">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout 
+                VerticalOptions="End">
+                <Picker 
+                    x:Name="pckOpciones" 
+                    ItemsSource="{Binding Opciones}" 
+                    ItemDisplayBinding="{Binding Nombre}" 
+                    Title="Seleccione opción" 
+                    SelectedIndexChanged="SeleccionarOpcion"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

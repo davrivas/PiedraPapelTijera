@@ -11,7 +11,7 @@ namespace PiedraPapelTijera.VistaModelo
         public Opcion Piedra { get; private set; }
         public Opcion Papel { get; private set; }
         public Opcion Tijera { get; private set; }
-        private readonly IList<Opcion> _opciones;
+        public IList<Opcion> Opciones { get; private set; }
 
         public Jugador Humano { get; private set; }
         public Jugador Maquina { get; private set; }
@@ -37,7 +37,7 @@ namespace PiedraPapelTijera.VistaModelo
                 Nombre = "Tijera",
                 NombreArchivo = "tijera.png"
             };
-            _opciones = new List<Opcion> { Piedra, Papel, Tijera };
+            Opciones = new List<Opcion> { Piedra, Papel, Tijera };
 
             Humano = new Jugador { EsHumano = true };
             Maquina = new Jugador { EsHumano = false };
@@ -59,8 +59,8 @@ namespace PiedraPapelTijera.VistaModelo
         private void MaquinaEscoge()
         {
             var random = new Random();
-            int indiceOpcion = random.Next(_opciones.Count);
-            Maquina.Opcion = _opciones[indiceOpcion];
+            int indiceOpcion = random.Next(Opciones.Count);
+            Maquina.Opcion = Opciones[indiceOpcion];
 
             ComprobarOpcion();
         }
