@@ -11,7 +11,7 @@ namespace PiedraPapelTijera.VistaModelo
         public Opcion Piedra { get; private set; }
         public Opcion Papel { get; private set; }
         public Opcion Tijera { get; private set; }
-        private IList<Opcion> _opciones;
+        private readonly IList<Opcion> _opciones;
 
         public Jugador Humano { get; private set; }
         public Jugador Maquina { get; private set; }
