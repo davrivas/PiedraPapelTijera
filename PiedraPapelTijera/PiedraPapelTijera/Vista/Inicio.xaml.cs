@@ -17,10 +17,22 @@ namespace PiedraPapelTijera.Vista
             BindingContext = _vistaModelo;
         }
 
-        private void SeleccionarOpcion(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            object opcionSeleccionada = pckOpciones.SelectedItem;
-            _vistaModelo.ComandoEscogerOpcion.Execute(opcionSeleccionada);
+            base.OnAppearing();
+
+            MessagingCenter.Subscribe<InicioVistaModelo>(_vistaModelo, InicioVistaModelo.MensajeResultado, MostrarMensaje);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<InicioVistaModelo>(_vistaModelo, InicioVistaModelo.MensajeResultado);
+        }
+
+        private async void MostrarMensaje(InicioVistaModelo obj)
+        {
+            await DisplayAlert("Resultado", obj.Resultado, "Cancelar");
         }
     }
 }

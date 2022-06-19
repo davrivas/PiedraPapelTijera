@@ -5,30 +5,44 @@
              Title="Piedra papel o tijera">
     <ContentPage.Content>
         <StackLayout>
-            <Label FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" Text="Piedra, papel o tijera" />
-            <StackLayout Orientation="Horizontal">
-                <StackLayout BindingContext="{Binding Piedra}">
-                    <Image Source="{Binding NombreArchivo}" Aspect="AspectFit" />
-                    <Label Text="{ Binding Nombre}" HorizontalOptions="Center" />
+            <Label FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" Text="Piedra, papel o tijera" Margin="0,50,0,0" />
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <StackLayout x:Name="StackOpciones" Orientation="Horizontal">
+                    <StackLayout BindingContext="{Binding Piedra}">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference StackOpciones}, Path=BindingContext.PiedraComando}"
+                                              CommandParameter="Piedra" />
+                        </StackLayout.GestureRecognizers>
+                        <Image Source="{Binding NombreArchivo}" Aspect="AspectFit" />
+                        <Label Text="{ Binding Nombre}" HorizontalOptions="Center" />
+                    </StackLayout>
+                    <StackLayout BindingContext="{Binding Papel}">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference StackOpciones}, Path=BindingContext.PapelComando}"
+                                              CommandParameter="Papel" />
+                        </StackLayout.GestureRecognizers>
+                        <Image Source="{Binding NombreArchivo}" Aspect="AspectFit" />
+                        <Label Text="{ Binding Nombre}" HorizontalOptions="Center" />
+                    </StackLayout>
+                    <StackLayout BindingContext="{Binding Tijera}">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference StackOpciones}, Path=BindingContext.TijeraComando}"
+                                              CommandParameter="Tijera" />
+                        </StackLayout.GestureRecognizers>
+                        <Image Source="{Binding NombreArchivo}" Aspect="AspectFit" />
+                        <Label Text="{ Binding Nombre}" HorizontalOptions="Center" />
+                    </StackLayout>
                 </StackLayout>
-                <StackLayout BindingContext="{Binding Papel}">
-                    <Image Source="{Binding NombreArchivo}" Aspect="AspectFit" />
-                    <Label Text="{ Binding Nombre}" HorizontalOptions="Center" />
+                <StackLayout Margin="0,10,0,0">
+                    <Label HorizontalOptions="CenterAndExpand" FontSize="Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Puntaje: " FontAttributes="Bold" />
+                                <Span Text="{Binding Puntaje}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </StackLayout>
-                <StackLayout BindingContext="{Binding Tijera}">
-                    <Image Source="{Binding NombreArchivo}" Aspect="AspectFit" />
-                    <Label Text="{ Binding Nombre}" HorizontalOptions="Center" />
-                </StackLayout>
-            </StackLayout>
-            <!--Temporal-->
-            <StackLayout 
-                VerticalOptions="End">
-                <Picker 
-                    x:Name="pckOpciones" 
-                    ItemsSource="{Binding Opciones}" 
-                    ItemDisplayBinding="{Binding Nombre}" 
-                    Title="Seleccione opción" 
-                    SelectedIndexChanged="SeleccionarOpcion"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

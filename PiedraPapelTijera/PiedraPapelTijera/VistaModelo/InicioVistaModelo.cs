@@ -1,117 +1,149 @@
-﻿using PiedraPapelTijera.Modelo;
+﻿using MvvmHelpers;
+using PiedraPapelTijera.Modelo;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace PiedraPapelTijera.VistaModelo
 {
-    public class InicioVistaModelo
+    public class InicioVistaModelo : ObservableObject
     {
-        public Opcion Piedra { get; private set; }
-        public Opcion Papel { get; private set; }
-        public Opcion Tijera { get; private set; }
-        public IList<Opcion> Opciones { get; private set; }
+        private const string NombrePiedra = "Piedra";
+        private const string NombrePapel = "Papel";
+        private const string NombreTijera = "Tijera";
+        private const string Victoria = nameof(Victoria);
+        private const string Empate = nameof(Empate);
+        private const string Derrota = nameof(Derrota);
+        private readonly Random _random = new Random();
 
-        public Jugador Humano { get; private set; }
-        public Jugador Maquina { get; private set; }
+        public const string MensajeResultado = nameof(MensajeResultado);
+        public string Resultado { get; private set; }
 
-        public ICommand ComandoEscogerOpcion { get; private set; }
+        public Opcion Piedra { get; }
+        public Opcion Papel { get; }
+        public Opcion Tijera { get; }
+        private IList<Opcion> _opciones;
+
+        public Jugador Humano { get; }
+        public Jugador Maquina { get; }
+
+        public ICommand PiedraComando { get; }
+        public ICommand PapelComando { get; }
+        public ICommand TijeraComando { get; }
 
         public bool YaEscogio { get; private set; }
+
+        private int _puntaje;
+
+        public int Puntaje
+        {
+            get { return _puntaje; }
+            set {
+                SetProperty(ref _puntaje, value);
+            }
+        }
 
         public InicioVistaModelo()
         {
             Piedra = new Opcion
             {
-                Nombre = "Piedra",
+                Nombre = NombrePiedra,
                 NombreArchivo = "piedra.png"
             };
             Papel = new Opcion
             {
-                Nombre = "Papel",
+                Nombre = NombrePapel,
                 NombreArchivo = "papel.png"
             };
             Tijera = new Opcion
             {
-                Nombre = "Tijera",
+                Nombre = NombreTijera,
                 NombreArchivo = "tijera.png"
             };
-            Opciones = new List<Opcion> { Piedra, Papel, Tijera };
+            _opciones = new List<Opcion> { Piedra, Papel, Tijera };
 
             Humano = new Jugador { EsHumano = true };
             Maquina = new Jugador { EsHumano = false };
 
-            ComandoEscogerOpcion = new Command<object>(EscogerOpcion);
+            PiedraComando = new Command<string>(EscogerOpcion);
+            PapelComando = new Command<string>(EscogerOpcion);
+            TijeraComando = new Command<string>(EscogerOpcion);
 
             YaEscogio = Humano.Opcion != null;
+            Puntaje = 0;
         }
 
-        private void EscogerOpcion(object obj)
+        private void EscogerOpcion(string opcion)
         {
-            var opcion = obj as Opcion;
-            Humano.Opcion = opcion;
+            Humano.Opcion = _opciones.First(x => x.Nombre == opcion);
             YaEscogio = true;
-
             MaquinaEscoge();
         }
 
         private void MaquinaEscoge()
         {
-            var random = new Random();
-            int indiceOpcion = random.Next(Opciones.Count);
-            Maquina.Opcion = Opciones[indiceOpcion];
+            var indiceOpcion = _random.Next(_opciones.Count);
+            var opcion = _opciones[indiceOpcion];
+            Maquina.Opcion = opcion;
 
             ComprobarOpcion();
         }
 
         private void ComprobarOpcion()
         {
-            if (Humano.Opcion.Equals(Piedra))
+            Resultado = $"{Maquina.Opcion.Nombre}: ";
+
+            if (Humano.Opcion.Nombre == Maquina.Opcion.Nombre)
             {
-                if (Maquina.Opcion.Equals(Papel))
-                {
-                    // perdió
-                }
-                else if (Maquina.Opcion.Equals(Tijera))
-                {
-                    // ganó
-                }
-                else
-                {
-                    // empató
-                }
-            }
-            else if (Humano.Opcion.Equals(Papel))
-            {
-                if (Maquina.Opcion.Equals(Piedra))
-                {
-                    // ganó
-                }
-                else if (Maquina.Opcion.Equals(Tijera))
-                {
-                    // perdió
-                }
-                else
-                {
-                    // empató
-                }
+                Resultado = Empate;
+                Puntaje++;
             }
             else
             {
-                if (Maquina.Opcion.Equals(Piedra))
+                switch (Humano.Opcion.Nombre)
                 {
-                    // perdió
-                }
-                else if (Maquina.Opcion.Equals(Papel))
-                {
-                    // ganó
-                }
-                else
-                {
-                    // empató
+                    case NombrePiedra:
+                        switch (Maquina.Opcion.Nombre)
+                        {
+                            case NombrePapel:
+                                Resultado += Derrota;
+                                break;
+                            case NombreTijera:
+                                Resultado += Victoria;
+                                Puntaje += 3;
+                                break;
+                        }
+                        break;
+                    case NombrePapel:
+                        switch (Maquina.Opcion.Nombre)
+                        {
+                            case NombrePiedra:
+                                Resultado += Victoria;
+                                Puntaje += 3;
+                                break;
+                            case NombreTijera:
+                                Resultado += Derrota;
+                                break;
+                        }
+                        break;
+                    case NombreTijera:
+                        switch (Maquina.Opcion.Nombre)
+                        {
+                            case NombrePiedra:
+                                Resultado += Derrota;
+                                break;
+                            case NombrePapel:
+                                Resultado += Victoria;
+                                Puntaje += 3;
+                                break;
+                        }
+                        break;
                 }
             }
+
+            MessagingCenter.Send(this, MensajeResultado);
         }
     }
 }
